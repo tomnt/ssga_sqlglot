@@ -1,7 +1,7 @@
 import sqlglot
 # r = sqlglot.transpile("SELECT EPOCH_MS(1618088028295)", read="duckdb", write="hive")[0]
 
-
+#17.4.1
 """
 SQL Dialects Reference
 https://en.wikibooks.org/wiki/SQL_Dialects_Reference/Print_version
@@ -82,7 +82,15 @@ https://www.postgresql.org/docs/current/sql-expressions.html
 #     AS $$ SELECT * FROM dept WHERE name = $1 $$
 #     LANGUAGE SQL;""", read="postgres", write="databricks")[0] # sqlglot.errors.ParseError: Invalid expression / Unexpected token. Line 3, Col: 16.
 
+# filename = 'sql/redshift/Redshift DDL 3_Tables.sql'
+filename = 'sql/redshift/dim_ssga_security.sql'
+f = open(filename, 'r')
+s = f.read()
+
+r = sqlglot.transpile(s, read="redshift", write="databricks", pretty = True)[0] # SELECT COLLECT_LIST(a) FROM table
+
+
 # 4.2.7. Aggregate Expressions
-r = sqlglot.transpile("SELECT array_agg(a ORDER BY b DESC) FROM table;", read="postgres", write="databricks")[0] # SELECT COLLECT_LIST(a) FROM table
+# r = sqlglot.transpile("SELECT array_agg(a ORDER BY b DESC) FROM table;", read="redshift", write="databricks")[0] # SELECT COLLECT_LIST(a) FROM table
 
 print(r)
