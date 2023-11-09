@@ -162,7 +162,8 @@ CREATE TABLE IF NOT EXISTS dim_ssga_fund (
 )
 DISTSTYLE KEY
 DISTKEY (SSGA_fund_base_id)
-SORTKEY (asof_calendar_day);
+--SORTKEY (asof_calendar_day)
+;
 
 CREATE TABLE IF NOT EXISTS dim_ssga_security (
    ssga_security_hist_id bigint                         not null,
