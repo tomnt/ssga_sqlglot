@@ -1,4 +1,15 @@
+# Environments
+```
+python --version
+Python 3.9.13
+```
+
 # Setup
+Set proxy(If needed)
+```shell
+set https_proxy=http://pzenproxy.statestr.com:80 --trusted-host pypi.org --trusted -host files.pythonhosted.org
+```
+Install packages
 ```shell
 pip install -r requirements.txt
 ```
@@ -13,9 +24,15 @@ python main.py dim_ssga_security.sql
 ```
 
 # Notices
- - 'SORTKEY (asof_calendar_day)' might not work. > ValueError: Expected an Expression. Received <class 'list'>: [(IDENTIFIER this: asof_calendar_day, quoted: False)]
- - Cases, all lower cases in actual outputs.
- - Some columns are missing.
+  - ## SQLGlot related
+  - 'SORTKEY (asof_calendar_day)' might not work. > ValueError: Expected an Expression. Received <class 'list'>: [(IDENTIFIER this: asof_calendar_day, quoted: False)]
+  - SQL functions are not supported.
+  - Meta commands are not supported.
+  - 'VIEW' statement is not supported.
+  - (Patched) 'STRING' type could be converted to 'VARCHAR(*)'.
+  - ## Others
+  - Cases, all lower cases in actual outputs.
+  - Some columns are missing.
 
 Expected results
 ```SQL

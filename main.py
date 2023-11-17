@@ -1,7 +1,8 @@
 import os.path
+import re
 import sqlglot
-import sys
 import sqlparse
+import sys
 
 INPUT_PATH = 'sql/input/'
 OUTPUT_PATH = 'sql/output/'
@@ -74,18 +75,22 @@ def translate(input_filename: str) -> None:
     input_file_content = f.read()
 
     # Translate the SQL dialects syntax
-    sqls = sqlglot.transpile(input_file_content, read="redshift", write="databricks",
-                             pretty=True)
+    sqls = sqlglot.transpile(input_file_content, read="redshift", write="databricks", pretty=True)
 
     # Tranlate distribution styles statements in the Redshift style SQL such as 'DISTSTYLE' and 'DISTKEY'
     output_sqls = []
     for sql in sqls:
         output_sqls.append(__tranlate_distribution_style_in_sql(sql))
+    output_file_content = ';\n\n'.join(output_sqls)
+
+    # Replace 'VARCHAR\(*)' to 'STRING'.
+    output_file_content = re.sub('VARCHAR\(+[0-9]+\)', 'STRING', output_file_content)
+
+    # # Adding semicolon at the end of the file.
+    # if len(sqls) > 0 and len(output_file_content):
+    #     output_file_content += ';'
 
     # Write file
-    output_file_content = ';\n\n'.join(output_sqls)
-    if len(sqls) > 0 and len(output_file_content):
-        output_file_content += ';'
     f = open(os.path.join(OUTPUT_PATH, 'out_' + input_filename), 'w')
     print(output_file_content)  # forDebug
     f.write(output_file_content)
