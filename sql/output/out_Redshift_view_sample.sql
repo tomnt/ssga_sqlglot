@@ -1,0 +1,8 @@
+CREATE OR REPLACE VIEW sales_vw AS
+SELECT
+  *
+FROM public.sales
+UNION ALL
+SELECT
+  *
+FROM spectrum.sales WITH NO SCHEMA BINDING

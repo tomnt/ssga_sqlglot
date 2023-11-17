@@ -86,6 +86,9 @@ def translate(input_filename: str) -> None:
     # Replace 'VARCHAR\(*)' to 'STRING'.
     output_file_content = re.sub('VARCHAR\(+[0-9]+\)', 'STRING', output_file_content)
 
+    # Replace 'CREATE VIEW ' to 'CREATE OR REPLACE VIEW'.
+    output_file_content = output_file_content.replace('CREATE VIEW ', 'CREATE OR REPLACE VIEW ')
+
     # # Adding semicolon at the end of the file.
     # if len(sqls) > 0 and len(output_file_content):
     #     output_file_content += ';'
