@@ -36,7 +36,7 @@ def __get_table_name_from_sql_create_statment(sql_create_statment: str) -> str:
                 return str(t.normalized)
         raise Exception(f'Given SQL statement does not contain table name. > {sql_create_statment}')
     else:
-        raise Exception(f'Given SQL statement is not CREATE statement. > {sql_create_statment}')
+        pass # raise Exception(f'Given SQL statement is not CREATE statement. > {sql_create_statment}')
 
 
 def __tranlate_distribution_style_in_sql(sql: str) -> str:
