@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS my_table (
    my_char_var           character varying(28)
 )
 DISTSTYLE KEY
-DISTKEY (SSGA_security_exchange_base_id);
+DISTKEY (SSGA_security_exchange_base_id)
 ;
 
 --CREATE VIEW my_view AS
