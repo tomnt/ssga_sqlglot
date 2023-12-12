@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS dim_ssga_security (
 [Trying out the SQLGlot](docs/trying_out_sqlglot.md)
 
 # SQLGlot Workflow
+![Workflow](./docs/sqlglot_workflow.png)
 ## Trace
 ```shell
 __init__.transpile() t.List[str]
