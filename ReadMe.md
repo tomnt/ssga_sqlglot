@@ -61,18 +61,18 @@ CREATE TABLE IF NOT EXISTS dim_ssga_security (
 ## Trace
 ```shell
 __init__.transpile() t.List[str]
-__init__.parse(sql: str, read: DialectType) -> t.List[t.Optional[Expression]]
-    Dialect.parse(sql: str) -> t.List[t.Optional[exp.Expression]]
-        Dialect.tokenize(sql: str)
-          Tokenizer.tokenize(sql: str) -> t.List[Token]
-        Parser.parse(raw_tokens: t.List[Token], sql: t.Optional[str] = None
-    ) -> t.List[t.Optional[exp.Expression]]:
-Dialect.get_or_raise(write: DialectType)() -> t.Type[Dialect]
-    Dialect.generate(expression: t.Optional[exp.Expression]) -> str
-    Generator.generate(...) -> str
-        Generator.sql(...)
-        Expression.transform(fun, *args, copy)
-        Expression.replace_children(...)
+    __init__.parse(sql: str, read: DialectType) -> t.List[t.Optional[Expression]]
+        Dialect.parse(sql: str) -> t.List[t.Optional[exp.Expression]]
+            Dialect.tokenize(sql: str)
+              Tokenizer.tokenize(sql: str) -> t.List[Token]
+            Parser.parse(raw_tokens: t.List[Token], sql: t.Optional[str] = None
+        ) -> t.List[t.Optional[exp.Expression]]:
+    Dialect.get_or_raise(write: DialectType)() -> t.Type[Dialect]
+        Dialect.generate(expression: t.Optional[exp.Expression]) -> str
+        Generator.generate(...) -> str
+            Generator.sql(...)
+            Expression.transform(fun, *args, copy)
+            Expression.replace_children(...)
 ```
 ## __init__.transpile
 ```python
