@@ -168,6 +168,13 @@ def transpile(
         print(f'Tokenizer.tokenize({sql}): self.tokens: ', self.tokens) # forDebug
         return self.tokens
 ```
+
+## Redshift
+```python
+            # exp.DistKeyProperty: lambda self, e: f"DISTKEY({e.name})", # forDebug # No impact on the output
+            # exp.DistStyleProperty: lambda self, e: self.naked_property(e), # forDebug # No impact on the output
+```
+
 ## sql/input/sample.sql
 ```sql
 CREATE TABLE IF NOT EXISTS my_table (
