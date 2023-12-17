@@ -124,6 +124,14 @@ def transpile(
     def tokenize(self, sql: str) -> t.List[Token]:
         print(f'Dialect.tokenize({sql}): self.tokenizer.tokenize(sql): ', self.tokenizer.tokenize(sql))  # forDebug
         return self.tokenizer.tokenize(sql)
+
+    # ~~ Omited ~~
+    
+    def generate(self, expression: t.Optional[exp.Expression], **opts) -> str:
+        r = self.generator(**opts).generate(expression) # forDebug
+        print(f'Dialect.generate: ', r) # forDebug
+        return r # forDebug
+        # return self.generator(**opts).generate(expression) # forDebug
 ```
 
 ## Postgres
