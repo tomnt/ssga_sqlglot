@@ -1,4 +1,4 @@
-# pip install graphvizSQLGlot tryout
+# SQLGlot tryout
 
 # Environments
 ```
