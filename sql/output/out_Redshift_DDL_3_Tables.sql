@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS dim_ssga_fund (
   TBLPROPERTIES('DELTA.FEATURE.ALLOWCOLUMNDEFAULTS' = 'SUPPORTED','delta.isolationLevel' = 'Serializable','delta.feature.timestampNtz' = 'supported');
   
   ALTER TABLE dim_ssga_fund ALTER COLUMN Effective_Timestamp DROP DEFAULT;
-  ALTER TABLE dim_ssga_fund" ALTER COLUMN Effective_Timestamp SET DEFAULT (TO_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), CURRENT_TIMEZONE()));
+  ALTER TABLE dim_ssga_fund ALTER COLUMN Effective_Timestamp SET DEFAULT (TO_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), CURRENT_TIMEZONE()));
             ;
 
 CREATE TABLE IF NOT EXISTS dim_ssga_security (
@@ -367,7 +367,7 @@ CREATE TABLE IF NOT EXISTS dim_ssga_security (
   TBLPROPERTIES('DELTA.FEATURE.ALLOWCOLUMNDEFAULTS' = 'SUPPORTED','delta.isolationLevel' = 'Serializable','delta.feature.timestampNtz' = 'supported');
   
   ALTER TABLE dim_ssga_security ALTER COLUMN Effective_Timestamp DROP DEFAULT;
-  ALTER TABLE dim_ssga_security" ALTER COLUMN Effective_Timestamp SET DEFAULT (TO_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), CURRENT_TIMEZONE()));
+  ALTER TABLE dim_ssga_security ALTER COLUMN Effective_Timestamp SET DEFAULT (TO_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), CURRENT_TIMEZONE()));
             ;
 
 CREATE TABLE IF NOT EXISTS dim_ssga_security_exchange (
@@ -396,5 +396,5 @@ CREATE TABLE IF NOT EXISTS dim_ssga_security_exchange (
   TBLPROPERTIES('DELTA.FEATURE.ALLOWCOLUMNDEFAULTS' = 'SUPPORTED','delta.isolationLevel' = 'Serializable','delta.feature.timestampNtz' = 'supported');
   
   ALTER TABLE dim_ssga_security_exchange ALTER COLUMN Effective_Timestamp DROP DEFAULT;
-  ALTER TABLE dim_ssga_security_exchange" ALTER COLUMN Effective_Timestamp SET DEFAULT (TO_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), CURRENT_TIMEZONE()));
+  ALTER TABLE dim_ssga_security_exchange ALTER COLUMN Effective_Timestamp SET DEFAULT (TO_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), CURRENT_TIMEZONE()));
             

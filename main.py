@@ -61,7 +61,7 @@ def __tranlate_distribution_style_in_sql(sql: str) -> str:
   TBLPROPERTIES('DELTA.FEATURE.ALLOWCOLUMNDEFAULTS' = 'SUPPORTED','delta.isolationLevel' = 'Serializable','delta.feature.timestampNtz' = 'supported');
   
   ALTER TABLE """ + table_name + """ ALTER COLUMN Effective_Timestamp DROP DEFAULT;
-  ALTER TABLE """ + table_name + """" ALTER COLUMN Effective_Timestamp SET DEFAULT (TO_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), CURRENT_TIMEZONE()));
+  ALTER TABLE """ + table_name + """ ALTER COLUMN Effective_Timestamp SET DEFAULT (TO_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), CURRENT_TIMEZONE()));
             """
             return sql_tranlated
         else:
