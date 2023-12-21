@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS dim_ssga_fund (
   custody_alias STRING,
   isin_alias STRING,
   ticker_alias STRING,
-  effective_timestamp,
+  effective_timestamp TIMESTAMP NOT NULL,
   aggressiveness STRING,
   active_sel_approach_code STRING,
   alt_sub_asset_type_code STRING,
@@ -344,7 +344,7 @@ CREATE TABLE IF NOT EXISTS dim_ssga_security (
   type_of_bond STRING,
   future_category STRING,
   cadis_system_uptimestampd TIMESTAMP,
-  effective_timestamp,
+  effective_timestamp TIMESTAMP NOT NULL,
   final_maturity_date DATE,
   prks STRING,
   mch_id STRING,
@@ -390,7 +390,7 @@ CREATE TABLE IF NOT EXISTS dim_ssga_security_exchange (
   id_bb_global STRING,
   composite_id_bb_global STRING,
   exch_code STRING,
-  effective_timestamp
+  effective_timestamp TIMESTAMP NOT NULL
 )
   USING DELTA
   TBLPROPERTIES('DELTA.FEATURE.ALLOWCOLUMNDEFAULTS' = 'SUPPORTED','delta.isolationLevel' = 'Serializable','delta.feature.timestampNtz' = 'supported');

@@ -90,7 +90,7 @@ def translate(input_filename: str) -> None:
     output_file_content = output_file_content.replace('CREATE VIEW ', 'CREATE OR REPLACE VIEW ')
 
     # Remove " TIMESTAMP NOT NULL DEFAULT CAST(FROM_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), 'UTC') AS TIMESTAMP"
-    output_file_content = output_file_content.replace("effective_timestamp TIMESTAMP NOT NULL DEFAULT CAST(FROM_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), 'UTC') AS TIMESTAMP)", 'effective_timestamp')
+    output_file_content = output_file_content.replace("effective_timestamp TIMESTAMP NOT NULL DEFAULT CAST(FROM_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), 'UTC') AS TIMESTAMP)", 'effective_timestamp TIMESTAMP NOT NULL')
 
     # # Adding semicolon at the end of the file.
     # if len(sqls) > 0 and len(output_file_content):
