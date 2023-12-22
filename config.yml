@@ -1,5 +1,6 @@
 input_path: sql/input/
 output_path: sql/output/
+print_results: 1  # 0: False, 1: True
 databricks:
   tranlate_distribution_style_in_sql: 1 # 0: False, 1: True
   sub: # Replace by RegEx.

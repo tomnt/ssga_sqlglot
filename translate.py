@@ -97,7 +97,8 @@ class Translator:
         output_file_content = ';\n\n'.join(sqls)
         # Write output file
         f = open(os.path.join(config['output_path'], output_filename), 'w')
-        # print(output_file_content)  # forDebug
+        if config['print_results']:
+            print(output_file_content)
         f.write(output_file_content)
 
 
