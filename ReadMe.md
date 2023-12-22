@@ -23,10 +23,10 @@ pip install -r requirements.txt
 # Execution
 ```shell
 # Without params
-python main.py
+python translate.py
 
 # Specifying a SQL filename.
-python main.py dim_ssga_security.sql
+python translate.py dim_ssga_security.sql
 ```
 
 # Notices
@@ -271,7 +271,7 @@ DISTKEY (SSGA_security_exchange_base_id);
 
 ## Output
 ```shell
-(venv) user@MBP-2021 ssga_sqlglot% python main.py sample.sql
+(venv) user@MBP-2021 ssga_sqlglot% python translate.py sample.sql
 Dialect.parser
 Tokenizer.tokenize(): before scan
 Tokens.__init__(): text: CREATE
