@@ -22,11 +22,11 @@ pip install -r requirements.txt
 
 # Execution
 ```shell
-# Without params
-python translate.py
 
 # Specifying a SQL filename.
-python translate.py dim_ssga_security.sql
+python translate.py --input dim_ssga_security.sql
+
+python translate.py --i dim_ssga_security.sql
 ```
 
 # Notices
