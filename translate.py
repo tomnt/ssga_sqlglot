@@ -65,28 +65,26 @@ class Translator:
                 sql_tranlated += str(t.normalized)
         return sql_tranlated
 
-    def __customize_databricks_output(self, sqls: list) -> str:
+    def __customize_databricks(self, sqls: list) -> list:
         """
-        Customize Databricks output
-        :param sqls: List of SQLs
+        Customize Databricks SQL statements' syntax
+        :param sqls: List of SQL statements to customize.
         :type sqls: list
-        :return: Databricks output
-        :rtype: str
+        :return: Customized Databricks SQL statements
+        :rtype: list
         """
         # Tranlate distribution styles statements in the Redshift style SQL such as 'DISTSTYLE' and 'DISTKEY'
         output_sqls = []
         for sql in sqls:
-            output_sqls.append(self.__tranlate_distribution_style_in_sql(sql))
-        output_file_content = ';\n\n'.join(output_sqls)
-        # Replace 'VARCHAR\(*)' to 'STRING'.
-        output_file_content = re.sub('VARCHAR\(+[0-9]+\)', 'STRING', output_file_content)
-        # Replace 'CREATE VIEW ' to 'CREATE OR REPLACE VIEW'.
-        output_file_content = output_file_content.replace('CREATE VIEW ', 'CREATE OR REPLACE VIEW ')
-        # Remove " TIMESTAMP NOT NULL DEFAULT CAST(FROM_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), 'UTC') AS TIMESTAMP"
-        output_file_content = output_file_content.replace(
-            "effective_timestamp TIMESTAMP NOT NULL DEFAULT CAST(FROM_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), 'UTC') AS TIMESTAMP)",
-            'effective_timestamp TIMESTAMP NOT NULL')
-        return output_file_content
+            sql = self.__tranlate_distribution_style_in_sql(sql)
+            # Replace 'VARCHAR\(*)' to 'STRING'.
+            sql = re.sub('VARCHAR\(+[0-9]+\)', 'STRING', sql)
+            sql = sql.replace('CREATE VIEW ', 'CREATE OR REPLACE VIEW ')
+            sql = sql.replace(
+                "effective_timestamp TIMESTAMP NOT NULL DEFAULT CAST(FROM_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), 'UTC') AS TIMESTAMP)",
+                'effective_timestamp TIMESTAMP NOT NULL')
+            output_sqls.append(sql)
+        return output_sqls
 
     def translate(self, input_filename: str, output_filename: str, read: str, write: str, config: dict) -> None:
         # Read input file
@@ -95,12 +93,11 @@ class Translator:
         # Translate the SQL dialects syntax
         sqls = sqlglot.transpile(input_file_content, read=read, write=write, pretty=True)
         if write is 'databricks':
-            output_file_content = self.__customize_databricks_output(sqls)
-        else:
-            output_file_content = ';\n\n'.join(sqls)
+            sqls = self.__customize_databricks(sqls)
+        output_file_content = ';\n\n'.join(sqls)
         # Write output file
         f = open(os.path.join(config['output_path'], output_filename), 'w')
-        print(output_file_content)  # forDebug
+        # print(output_file_content)  # forDebug
         f.write(output_file_content)
 
 
