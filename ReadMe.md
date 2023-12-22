@@ -1,5 +1,9 @@
 # SQLGlot tryout
 
+SQLGlot is a no-dependency SQL parser, transpiler, optimizer, and engine. It can be used to format SQL or translate between 20 different dialects like Redshift and Databricks. 
+
+This script helps the SQLGLot to meet our business requirements to translate SQL statement defining table structure especially from Redshift to Databricks.
+
 # Environments
 ```
 python --version
