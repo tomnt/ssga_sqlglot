@@ -65,24 +65,24 @@ class Translator:
                 sql_tranlated += str(t.normalized)
         return sql_tranlated
 
-    def __customize_databricks(self, sqls: list) -> list:
+    def __customize_databricks(self, sqls: list, map: dict) -> list:
         """
-        Customize Databricks SQL statements' syntax
+        Customize Databricks SQL statements' syntax.
         :param sqls: List of SQL statements to customize.
         :type sqls: list
+        :param map:
+        :type map:
         :return: Customized Databricks SQL statements
         :rtype: list
         """
-        # Tranlate distribution styles statements in the Redshift style SQL such as 'DISTSTYLE' and 'DISTKEY'
         output_sqls = []
         for sql in sqls:
-            sql = self.__tranlate_distribution_style_in_sql(sql)
-            # Replace 'VARCHAR\(*)' to 'STRING'.
-            sql = re.sub('VARCHAR\(+[0-9]+\)', 'STRING', sql)
-            sql = sql.replace('CREATE VIEW ', 'CREATE OR REPLACE VIEW ')
-            sql = sql.replace(
-                "effective_timestamp TIMESTAMP NOT NULL DEFAULT CAST(FROM_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), 'UTC') AS TIMESTAMP)",
-                'effective_timestamp TIMESTAMP NOT NULL')
+            if map['tranlate_distribution_style_in_sql']:
+                sql = self.__tranlate_distribution_style_in_sql(sql)
+            for v in map['sub'].values():
+                sql = re.sub(v['from'], v['to'], sql)
+            for v in map['replace'].values():
+                sql = sql.replace(v['from'], v['to'])
             output_sqls.append(sql)
         return output_sqls
 
@@ -93,7 +93,7 @@ class Translator:
         # Translate the SQL dialects syntax
         sqls = sqlglot.transpile(input_file_content, read=read, write=write, pretty=True)
         if write is 'databricks':
-            sqls = self.__customize_databricks(sqls)
+            sqls = self.__customize_databricks(sqls, config['databricks'])
         output_file_content = ';\n\n'.join(sqls)
         # Write output file
         f = open(os.path.join(config['output_path'], output_filename), 'w')

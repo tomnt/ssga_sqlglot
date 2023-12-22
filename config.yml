@@ -1,2 +1,15 @@
 input_path: sql/input/
 output_path: sql/output/
+databricks:
+  tranlate_distribution_style_in_sql: 1 # 0: False, 1: True
+  sub: # Replace by RegEx.
+    1:
+      from: 'VARCHAR\(+[0-9]+\)'
+      to: 'STRING'
+  replace:
+    1:
+      from: 'CREATE VIEW '
+      to: 'CREATE OR REPLACE VIEW '
+    2:
+      from: "effective_timestamp TIMESTAMP NOT NULL DEFAULT CAST(FROM_UTC_TIMESTAMP(CURRENT_TIMESTAMP(), 'UTC') AS TIMESTAMP)"
+      to: 'effective_timestamp TIMESTAMP NOT NULL'
