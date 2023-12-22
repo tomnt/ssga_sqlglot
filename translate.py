@@ -92,7 +92,7 @@ class Translator:
         input_file_content = f.read()
         # Translate the SQL dialects syntax
         sqls = sqlglot.transpile(input_file_content, read=read, write=write, pretty=True)
-        if write is 'databricks':
+        if write == 'databricks':
             sqls = self.__customize_databricks(sqls, config['databricks'])
         output_file_content = ';\n\n'.join(sqls)
         # Write output file
